@@ -31,23 +31,17 @@ in
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-     # Desktop Env
-     wofi
-     waybar
-     hyprpaper
-     ghostty
-     firefox
-    ];
   };
 
-  home-manager.users.ddd = { ... }: {
+  home-manager.backupFileExtension = ".bkp";
+  home-manager.users.ddd = { pkgs, ... }: {
+    home.stateVersion = "25.05"; # Static
     imports = [
-      /home/ddd/.config/home-manager/home.nix
-    ];
-    home.stateVersion = "25.05";
+	/home/ddd/.config/home-manager/home.nix
+      ];
   };
 
+  # Need this or else no restart
   programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
