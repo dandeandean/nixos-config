@@ -5,9 +5,15 @@ For me & myself
 The Nix config file is found at `/etc/nixos/configuration.nix`
 The system can be build with
 
-```bash
+```sh
 nixos-rebuild switch
 ```
 
 This should be combined with the `dandeandean/dotfiles` repo.
+
+## Home Manager
+
+For some reason it's very mysterious to get home manager working on startup.
+That's because we need to import the module at `nixos-rebuild` time.
+We have to `nixos-rebuild` for the changes to pick up.
 

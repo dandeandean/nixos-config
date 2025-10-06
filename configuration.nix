@@ -6,11 +6,13 @@
 
 let
   do_security = false;
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      (import "${home-manager}/nixos")
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -30,11 +32,20 @@ in
     shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      tree
-      gh
-      tmux
-      jq
+     # Desktop Env
+     wofi
+     waybar
+     hyprpaper
+     ghostty
+     firefox
     ];
+  };
+
+  home-manager.users.ddd = { ... }: {
+    imports = [
+      /home/ddd/.config/home-manager/home.nix
+    ];
+    home.stateVersion = "25.05";
   };
 
   programs.zsh.enable = true;
@@ -64,13 +75,6 @@ in
      gcc_multi
      unzip
 
-     # Desktop Env
-
-     wofi
-     waybar
-     hyprpaper
-     ghostty
-     firefox
    ];
 
 
