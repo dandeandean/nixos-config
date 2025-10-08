@@ -33,16 +33,12 @@ in
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  home-manager.backupFileExtension = ".bkp";
-  home-manager.users.ddd = { pkgs, ... }: {
-    home.stateVersion = "25.05"; # Static
-    imports = [
-	/home/ddd/.config/home-manager/home.nix
-      ];
-  };
+  home-manager.backupFileExtension = "bkp";
 
   # Need this or else no restart
   programs.zsh.enable = true;
+
+  # Desktop stuff
 
   environment.systemPackages = with pkgs; [
      # System
@@ -87,45 +83,6 @@ in
   networking.firewall.enable = do_security;
 
 
-  /*
-  TODO: Make this a module
-  ########################################
-  ############# K8s Settings #############
-  ########################################
-
-  # No need for docker b/c containerd gets spawned
-  # Have this computer pinned to 10.0.0.10 in the network
-  networking.extraHosts = "10.0.0.10 api.kube";
-  networking.enableIPv6 = false;
-  # With IPv6 enabled, the nameservers look like this
-  # networking.nameservers = [
-  #   "75.75.75.75"
-  #   "75.75.76.76"
-  #   "2001:558:feed::1"
-  #   "2001:558:feed::2
-  # ];
-  # We only want 3 of these or else k8s will yell at us, so we'll just disable IPv6
-
-  # Disable swap
-  swapDevices = lib.mkForce [ ];
-
-  services.kubernetes = {
-    # As per nlewo.github.io
-    # Master enables apiserver, controllerManager, scheduler, addonManager, kube-proxy, & etcd
-    # Node enables kube-proxy
-    roles = [ "master" "node" ];
-    masterAddress = "api.kube";
-    apiserverAddress = "https://api.kube:6443";
-    # This may require changing permissions on the cluster-admin-key
-    # sudo chmod go+r /var/lib/kubernetes/secrets/cluster-admin-key.pem
-    easyCerts = true;
-    apiserver = {
-      securePort = 6443;
-      advertiseAddress = "10.0.0.10";
-    };
-    addons.dns.enable = true; 
-  };
-  */
   ########################################
   ############# GUI Settings #############
   ########################################
@@ -142,7 +99,70 @@ in
     enable = true;
     xwayland.enable = true;
   };
-  programs.waybar.enable = true;
+
+  home-manager.users.ddd = { pkgs, ... }: {
+    home.stateVersion = "25.05"; # Static
+    imports = [
+      /home/ddd/.config/home-manager/home.nix
+    ];
+
+    ## NixOS specific
+    programs.waybar = {
+      enable = true;
+    };
+    wayland.windowManager.hyprland = {
+      enable = true;
+      settings = {
+	"$terminal" = "ghostty";
+	"$fileManager" = "dolphin";
+	"$menu" = "wofi --show drun";
+	general = {
+	  "$mainMod" = "SUPER";
+	};
+	# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+	bind = [
+	  "$mainMod, Q, exec, $terminal"
+	  "$mainMod, C, killactive,"
+	  "$mainMod, M, exit,"
+	  "$mainMod, E, exec, $fileManager"
+	  "$mainMod, V, togglefloating,"
+	  "$mainMod, space, exec, $menu"
+	  "$mainMod, P, pseudo, # dwindle"
+	  "$mainMod, J, togglesplit, # dwindle"
+
+	  "$mainMod, 1, workspace, 1"
+	  "$mainMod, 2, workspace, 2"
+	  "$mainMod, 3, workspace, 3"
+	  "$mainMod, 4, workspace, 4"
+	  "$mainMod, 5, workspace, 5"
+	  "$mainMod, 6, workspace, 6"
+	  "$mainMod, 7, workspace, 7"
+	  "$mainMod, 8, workspace, 8"
+	  "$mainMod, 9, workspace, 9"
+	  "$mainMod, 0, workspace, 10"
+	  "$mainMod SHIFT, 1, movetoworkspace, 1"
+	  "$mainMod SHIFT, 2, movetoworkspace, 2"
+	  "$mainMod SHIFT, 3, movetoworkspace, 3"
+	  "$mainMod SHIFT, 4, movetoworkspace, 4"
+	  "$mainMod SHIFT, 5, movetoworkspace, 5"
+	  "$mainMod SHIFT, 6, movetoworkspace, 6"
+	  "$mainMod SHIFT, 7, movetoworkspace, 7"
+	  "$mainMod SHIFT, 8, movetoworkspace, 8"
+	  "$mainMod SHIFT, 9, movetoworkspace, 9"
+	  "$mainMod SHIFT, 0, movetoworkspace, 10"
+	  "$mainMod, S, togglespecialworkspace, magic"
+	  "$mainMod SHIFT, S, movetoworkspace, special:magic"
+	  "$mainMod, mouse_down, workspace, e+1"
+	  "$mainMod, mouse_up, workspace, e-1"
+	];
+	exec-once = [
+	  "waybar"
+	  "hyprpaper"
+	  "ghostty"
+	];
+      };
+    };
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix).
