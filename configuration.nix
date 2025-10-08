@@ -110,6 +110,17 @@ in
     programs.waybar = {
       enable = true;
     };
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+	preload = [
+	  "/home/ddd/git/nixos-config/wallpaper.jpg"
+	];
+	wallpaper = [
+	  ", /home/ddd/git/nixos-config/wallpaper.jpg"
+	];
+      };
+    };
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
