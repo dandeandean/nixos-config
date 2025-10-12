@@ -274,7 +274,6 @@ in
 	background-color: @bg;
       }
       '';
-
     };
     services.hyprpaper = {
       enable = true;
