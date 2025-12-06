@@ -7,6 +7,7 @@
 let
   do_security = false;
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  desktop_env = false;
 in
 {
   imports =
@@ -30,7 +31,10 @@ in
   users.users.ddd = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"  # Enable ‘sudo’ for the user.
+      "podman"
+    ];
   };
 
   home-manager.backupFileExtension = "bkp";
@@ -82,6 +86,8 @@ in
   services.fail2ban.enable = do_security;
   networking.firewall.enable = do_security;
 
+  services.k3s.enable = true;
+
 
   ########################################
   ############# GUI Settings #############
@@ -89,15 +95,15 @@ in
 
   # Login stuff
   services.displayManager = {
-    enable = true;
-    sddm.enable = true;
-    sddm.wayland.enable = true;
+    enable = desktop_env;
+    sddm.enable = desktop_env;
+    sddm.wayland.enable = desktop_env;
   };
 
-  programs.xwayland.enable = true;
+  programs.xwayland.enable = desktop_env;
   programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+    enable = desktop_env;
+    xwayland.enable = desktop_env;
   };
 
   home-manager.users.ddd = { pkgs, ... }: {
@@ -109,7 +115,7 @@ in
     ## NixOS specific
     # https://github.com/SwayKh/dotfiles/blob/main/waybar/style.css
     programs.waybar = {
-      enable = true;
+      enable = desktop_env;
       style = ''
       /* Use Pywal16 colors  */
       @define-color fg alpha(@background, 1.0);
@@ -276,7 +282,7 @@ in
       '';
     };
     services.hyprpaper = {
-      enable = true;
+      enable = desktop_env;
       settings = {
 	preload = [
 	  "/home/ddd/git/nixos-config/wallpaper.jpg"
@@ -287,7 +293,7 @@ in
       };
     };
     wayland.windowManager.hyprland = {
-      enable = true;
+      enable = desktop_env;
       settings = {
 	"$terminal" = "ghostty";
 	"$fileManager" = "dolphin";
@@ -344,6 +350,14 @@ in
   # (/run/current-system/configuration.nix).
   system.copySystemConfiguration = true;
 
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+    };
+  };
   # Don't change unless you like pain
   system.stateVersion = "25.05"; # Did you read the comment?
 }
