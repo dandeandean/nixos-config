@@ -6,17 +6,16 @@
 
 let
   do_security = false;
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  home-manager = builtins.fetchTarball
+    "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
   desktop_env = false;
-in
-{
-  imports =
-    [
-      /etc/nixos/hardware-configuration.nix
-      (import "${home-manager}/nixos")
-      ../users/ddd.nix
-      ../common/packages.nix
-    ];
+in {
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    (import "${home-manager}/nixos")
+    ../users/ddd.nix
+    ../common/packages.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -25,8 +24,9 @@ in
   networking.hostName = "splinter"; # Define your hostname.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    font = "ter-i32b"; #"Lat2-Terminus16";
-    packages = [ pkgs.terminus_font ];	#useXkbConfig = true; # use xkb.options in tty.
+    font = "ter-i32b"; # "Lat2-Terminus16";
+    packages =
+      [ pkgs.terminus_font ]; # useXkbConfig = true; # use xkb.options in tty.
   };
 
   # List services that you want to enable:
@@ -44,7 +44,6 @@ in
   networking.firewall.enable = do_security;
 
   services.k3s.enable = true;
-
 
   ########################################
   ############# GUI Settings #############
@@ -66,9 +65,7 @@ in
   home-manager.backupFileExtension = "bkp";
   home-manager.users.ddd = { pkgs, ... }: {
     home.stateVersion = "25.05";
-    imports = [
-      /home/ddd/.config/home-manager/home.nix
-    ];
+    imports = [ /home/ddd/.config/home-manager/home.nix ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
@@ -80,7 +77,8 @@ in
     podman = {
       enable = true;
       dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled =
+        true; # Required for containers under podman-compose to be able to talk to each other.
     };
   };
   # Don't change unless you like pain
