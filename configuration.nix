@@ -86,7 +86,6 @@ in
   services.fail2ban.enable = do_security;
   networking.firewall.enable = do_security;
 
-  services.k3s.enable = true;
 
 
   ########################################
@@ -350,6 +349,7 @@ in
   # (/run/current-system/configuration.nix).
   system.copySystemConfiguration = true;
 
+  services.k3s.enable = true;
   virtualisation = {
     containers.enable = true;
     podman = {
