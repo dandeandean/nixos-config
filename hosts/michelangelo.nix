@@ -10,4 +10,5 @@
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.copySystemConfiguration = true;
+  hardware.graphics.enable = true;
 }
