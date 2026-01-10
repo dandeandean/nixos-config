@@ -10,11 +10,4 @@
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.copySystemConfiguration = true;
-  home-manager = {
-    backupFileExtension = "bkp";
-    users.ddd = { pkgs, ... }: {
-      home.stateVersion = "25.05";
-      imports = [ /home/ddd/.config/home-manager/home.nix ];
-    };
-  };
 }
