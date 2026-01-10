@@ -22,7 +22,8 @@
     cargo
     go
     nodejs_22
-    gcc_multi
+    # gcc_multi
+    gcc
     unzip
     nixfmt-classic
   ];
