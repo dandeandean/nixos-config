@@ -2,6 +2,7 @@
   services.k3s.enable = true;
   virtualisation = {
     containers.enable = true;
+    containerd.enable = true;
     podman = {
       enable = true;
       dockerCompat = true;
