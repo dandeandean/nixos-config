@@ -10,5 +10,8 @@
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.copySystemConfiguration = true;
-  hardware.graphics.enable = true;
+  hardware = {
+    apple.touchBar = { enable = true; };
+    graphics = { enable = true; };
+  };
 }
