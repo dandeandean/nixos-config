@@ -23,4 +23,3 @@ Write something that can grab some of the fixtures we need:
 I.E.:
   - $HOME/git/dotfiles
   - $HOME/git/desktop-env
-  - $HOME/git/autotile-rs # This I could probably just write some nix for them
