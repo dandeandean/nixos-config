@@ -2,7 +2,6 @@
 let
   home-manager = builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-  bloat = true;
 in {
   imports = [ (import "${home-manager}/nixos") ];
   options = { bloat.enable = lib.mkEnableOption "Enable Desktop Environment"; };
