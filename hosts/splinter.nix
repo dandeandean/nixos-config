@@ -11,6 +11,7 @@
     # custom options
     sshBox.enable = true;
     isK3sNode.enable = true;
+    isK3sNode.doSecurity = false;
 
     # Don't change unless you like pain
     system.stateVersion = "25.05"; # Did you read the comment?
