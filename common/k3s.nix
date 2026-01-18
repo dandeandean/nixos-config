@@ -19,6 +19,7 @@
     services.k3s = {
       enable = config.isK3sNode.enable;
       # extraFlags = [ "--disable-network-policy" ];
+      serverAddr = "https://10.0.0.10:6443";
     };
     virtualisation = {
       containers.enable = true;
