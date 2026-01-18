@@ -17,7 +17,7 @@
   };
   config = {
     services.k3s = {
-      enable = (lib.mkIf config.isK3sNode.enable true);
+      enable = config.isK3sNode.enable;
       # extraFlags = [ "--disable-network-policy" ];
     };
     virtualisation = {

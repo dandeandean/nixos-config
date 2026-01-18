@@ -10,6 +10,6 @@
       apple.touchBar = { enable = true; };
       graphics = { enable = true; };
     };
-    # isK3sNode.enable = true;
+    bloat.enable = true;
   };
 }

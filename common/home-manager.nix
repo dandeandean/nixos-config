@@ -5,6 +5,7 @@ let
   bloat = true;
 in {
   imports = [ (import "${home-manager}/nixos") ];
+  options = { bloat.enable = lib.mkEnableOption "Enable Desktop Environment"; };
   config = {
     home-manager = {
       backupFileExtension = "bkp";
@@ -55,7 +56,7 @@ in {
                 lua-language-server
               ]
               #################### DEKSTOP ####################
-              ++ lib.optionals bloat [
+              ++ lib.optionals (config.bloat.enable) [
                 nerd-fonts.agave
                 wofi
                 waybar

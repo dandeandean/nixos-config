@@ -1,6 +1,4 @@
-{ lib, config, ... }:
-let do_security = false;
-in {
+{ lib, config, ... }: {
   options.sshBox = {
     enable = lib.mkEnableOption "do ssh?";
     doSecurity = lib.mkOption {
@@ -13,7 +11,7 @@ in {
       enable = config.sshBox.enable;
       ports = [ 22 ];
     };
-    services.fail2ban.enable = do_security;
-    networking.firewall.enable = do_security;
+    services.fail2ban.enable = config.sshBox.doSecurity;
+    networking.firewall.enable = config.sshBox.doSecurity;
   };
 }

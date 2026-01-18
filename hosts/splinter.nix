@@ -10,7 +10,6 @@ in {
 
   config = {
     # Use the systemd-boot EFI boot loader.
-    isK3sNode.enable = true;
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     networking.hostName = "splinter";
@@ -20,14 +19,9 @@ in {
       packages = [ pkgs.terminus_font ];
     };
 
-    # List services that you want to enable:
-
-    ########################################
-    ############# SSH Settings #############
-    ########################################
-    options.sshBox.enable = true;
-
-    # Enable the OpenSSH daemon.
+    # custom options
+    sshBox.enable = true;
+    isK3sNode.enable = true;
 
     # Don't change unless you like pain
     system.stateVersion = "25.05"; # Did you read the comment?
