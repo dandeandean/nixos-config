@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  do_security = false;
   home-manager = builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
   desktop_env = false;
@@ -26,14 +25,9 @@ in {
     ########################################
     ############# SSH Settings #############
     ########################################
+    options.sshBox.enable = true;
 
     # Enable the OpenSSH daemon.
-    services.openssh = {
-      enable = true;
-      ports = [ 22 ];
-    };
-    services.fail2ban.enable = do_security;
-    networking.firewall.enable = do_security;
 
     # Don't change unless you like pain
     system.stateVersion = "25.05"; # Did you read the comment?
