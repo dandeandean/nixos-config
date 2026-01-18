@@ -13,4 +13,5 @@
     apple.touchBar = { enable = true; };
     graphics = { enable = true; };
   };
+  k3s.isK3sNode.enable = true;
 }
