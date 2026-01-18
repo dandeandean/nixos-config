@@ -1,10 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ../users/ddd.nix
-    ../common/k3s.nix
-    ../common/home-manager.nix
-    ../common/system.nix
-
+    ../common
     /etc/nixos/hardware-configuration.nix
     /etc/nixos/apple-silicon-support
   ];
