@@ -11,9 +11,9 @@ in {
   # Good intro to options: https://librephoenix.com/2023-12-26-nixos-conditional-config-and-custom-options
   options.isK3sNode = {
     enable = lib.mkEnableOption "Enable the K3S service on host";
-    role = lib.mkOption {
-      type = lib.types.string;
-      default = "server";
+    isServer = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
       description =
         "Which role would you like the node to have: server or agent?";
     };
@@ -29,9 +29,9 @@ in {
     ];
     services.k3s = {
       enable = config.isK3sNode.enable;
-      role = config.isK3sNode.role;
-      serverAddr = hostAddr;
-      clusterInit = lib.mkIf config.isK3sNode.role "server";
+      role = if config.isK3sNode.isServer then "server" else "agent";
+      serverAddr = if config.isK3sNode.isServer then "" else hostAddr;
+      clusterInit = config.isK3sNode.isServer;
       token = builtins.readFile /home/ddd/.kube/cluster-secret;
       # extraFlags = [ "--disable-network-policy" ];
     };
