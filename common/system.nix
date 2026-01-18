@@ -1,6 +1,11 @@
 { pkgs, ... }: {
   config = {
     time.timeZone = "America/New_York";
+    i18n.defaultLocale = "en_US.UTF-8";
+    console = {
+      font = "ter-i32b";
+      packages = [ pkgs.terminus_font ];
+    };
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.copySystemConfiguration = true;
     programs.zsh.enable = true;
