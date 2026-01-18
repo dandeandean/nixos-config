@@ -1,4 +1,6 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+let hostAddr = "https://10.0.0.10:6443";
+in {
   /* STARTUP ISSUES: This seems to be what is causing the node startup issues.
        https://github.com/k3s-io/k3s/issues/12844
        https://dev.to/shankar_t/my-k3s-pi-cluster-died-after-a-reboot-a-troubleshooting-war-story-m93
@@ -10,16 +12,28 @@
   options.isK3sNode = {
     enable = lib.mkEnableOption "Enable the K3S service on host";
     role = lib.mkOption {
-      type = lib.types.nullOr (lib.types.enum [ "master" "employee" ]);
-      default = null;
-      description = "Which role would you like the node to have?";
+      type = lib.types.string;
+      default = "server";
+      description =
+        "Which role would you like the node to have: server or agent?";
     };
   };
   config = {
+    networking.firewall.allowedTCPPorts = [
+      6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
+      2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
+      2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+    ];
+    networking.firewall.allowedUDPPorts = [
+      8472 # k3s, flannel: required if using multi-node for inter-node networking
+    ];
     services.k3s = {
       enable = config.isK3sNode.enable;
+      role = config.isK3sNode.role;
+      serverAddr = hostAddr;
+      clusterInit = lib.mkIf config.isK3sNode.role "server";
+      token = builtins.readFile /home/ddd/.kube/cluster-secret;
       # extraFlags = [ "--disable-network-policy" ];
-      serverAddr = "https://10.0.0.10:6443";
     };
     virtualisation = {
       containers.enable = true;

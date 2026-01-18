@@ -35,6 +35,6 @@
         unzip
         nixfmt-classic
       ] ++ lib.optionals (builtins.currentSystem == "aarch64-linux") [ gcc ]
-      ++ lib.optionals (builtins.currentSystem == "X86_64-linux") [ gcc_multi ];
+      ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [ gcc_multi ];
   };
 }
