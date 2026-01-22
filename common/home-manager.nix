@@ -58,14 +58,61 @@ in {
               ++ lib.optionals (config.bloat.enable) [
                 nerd-fonts.agave
                 wofi
-                waybar
                 ghostty
                 firefox
-                sway
                 autotiling-rs
+                swaylock
               ];
           };
           fonts.fontconfig.enable = true;
+          #################### GUI ENV ####################
+          programs.waybar = {
+            enable = config.bloat.enable;
+            settings = {
+              mainBar = {
+                layer = "top";
+                position = "top";
+                height = 30;
+                output = [ "eDP-1" "HDMI-A-1" ];
+                modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
+                modules-right =
+                  [ "mpd" "custom/mymodule#with-css-id" "temperature" ];
+                "sway/workspaces" = {
+                  disable-scroll = true;
+                  all-outputs = true;
+                };
+                # modules-center = [ "sway/window" "custom/hello-from-waybar" ];
+                # "custom/hello-from-waybar" = {
+                #   format = "hello {}";
+                #   max-length = 40;
+                #   interval = "once";
+                #   exec = pkgs.writeShellScript "hello-from-waybar" ''
+                #     echo "from within waybar"
+                #   '';
+                # };
+              };
+            };
+          };
+          wayland.windowManager.sway = {
+            enable = config.bloat.enable;
+            config = {
+              menu = "${pkgs.wofi}/bin/wofi --show drun";
+              modifier = "Mod4";
+              terminal = "ghostty";
+              bars = [{ command = "waybar"; }];
+            };
+            extraConfig = ''
+              gaps inner 10
+              gaps horizontal 10
+              gaps vertical 10
+              default_border none
+              exec autotiling-rs
+
+              bindgesture swipe:right workspace prev
+              bindgesture swipe:left workspace next
+              input "type:keyboard" xkb_options caps:escape
+            '';
+          };
 
           ###################### GIT ######################
           programs = {
