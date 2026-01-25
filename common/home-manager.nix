@@ -7,6 +7,7 @@ in {
   options = { bloat.enable = lib.mkEnableOption "Enable Desktop Environment"; };
   config = {
     home-manager = {
+      useGlobalPkgs = true;
       backupFileExtension = "bkp";
       users.ddd = { pkgs, ... }: {
         config = {
@@ -81,15 +82,6 @@ in {
                   disable-scroll = true;
                   all-outputs = true;
                 };
-                # modules-center = [ "sway/window" "custom/hello-from-waybar" ];
-                # "custom/hello-from-waybar" = {
-                #   format = "hello {}";
-                #   max-length = 40;
-                #   interval = "once";
-                #   exec = pkgs.writeShellScript "hello-from-waybar" ''
-                #     echo "from within waybar"
-                #   '';
-                # };
               };
             };
           };
@@ -106,8 +98,7 @@ in {
               gaps horizontal 10
               gaps vertical 10
               default_border none
-              exec autotiling-rs
-
+              exec ${pkgs.autotiling-rs}/bin/autotiling-rs
               bindgesture swipe:right workspace prev
               bindgesture swipe:left workspace next
               input "type:keyboard" xkb_options caps:escape
