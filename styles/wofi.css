@@ -10,7 +10,7 @@ window {
 	border: 2px solid #3b4252;
 	background-color: #2e3440;
 	/* Dark Nord blue */
-	border-radius: 12px;
+	border-radius: 2px;
 }
 
 #outer-box {
@@ -18,7 +18,7 @@ window {
 	border: 2px solid #3b4252;
 	background-color: #2e3440;
 	/* Put your color here instead */
-	border-radius: 12px;
+	border-radius: 2px;
 	/* Apply rounding here */
 }
 
