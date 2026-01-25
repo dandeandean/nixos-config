@@ -107,6 +107,7 @@ in {
               bindgesture swipe:right workspace prev
               bindgesture swipe:left workspace next
               input "type:keyboard" xkb_options caps:escape
+              output * bg /home/ddd/git/nixos-config/wallpaper.jpg fill
             '';
           };
           programs.wofi = {
