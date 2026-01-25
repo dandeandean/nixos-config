@@ -58,7 +58,6 @@ in {
               #################### DEKSTOP ####################
               ++ lib.optionals (config.bloat.enable) [
                 nerd-fonts.agave
-                wofi
                 ghostty
                 firefox
                 autotiling-rs
@@ -76,8 +75,14 @@ in {
                 height = 30;
                 output = [ "eDP-1" "HDMI-A-1" ];
                 modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
-                modules-right =
-                  [ "mpd" "custom/mymodule#with-css-id" "temperature" ];
+                modules-right = [ "battery" "cpu" ];
+                battery = { format = "󰁹 {}%"; };
+                cpu = {
+                  interval = 10;
+                  format = "󰻠 {}%";
+                  max-length = 10;
+                  on-click = "";
+                };
                 "sway/workspaces" = {
                   disable-scroll = true;
                   all-outputs = true;
@@ -103,6 +108,15 @@ in {
               bindgesture swipe:left workspace next
               input "type:keyboard" xkb_options caps:escape
             '';
+          };
+          programs.wofi = {
+            enable = true;
+            settings = {
+              location = "center";
+              allow_markup = true;
+              width = 400;
+            };
+            style = builtins.readFile ../styles/wofi.css;
           };
 
           ###################### GIT ######################
