@@ -92,11 +92,13 @@ in {
           };
           wayland.windowManager.sway = {
             enable = config.bloat.enable;
+            checkConfig = true;
             config = {
               menu = "${pkgs.wofi}/bin/wofi --show drun";
               modifier = "Mod4";
               terminal = "ghostty";
               bars = [{ command = "waybar"; }];
+              output = { "eDP-1" = { bg = "${../wallpaper.jpg} fill"; }; };
             };
             extraConfig = ''
               gaps inner 10
@@ -107,7 +109,6 @@ in {
               bindgesture swipe:right workspace prev
               bindgesture swipe:left workspace next
               input "type:keyboard" xkb_options caps:escape
-              output * bg /home/ddd/git/nixos-config/wallpaper.jpg fill
             '';
           };
           programs.wofi = {
