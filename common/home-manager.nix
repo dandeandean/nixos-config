@@ -7,6 +7,7 @@ in {
   options = { bloat.enable = lib.mkEnableOption "Enable Desktop Environment"; };
   config = {
     home-manager = {
+      useGlobalPkgs = true;
       backupFileExtension = "bkp";
       users.ddd = { pkgs, ... }: {
         config = {
@@ -57,15 +58,68 @@ in {
               #################### DEKSTOP ####################
               ++ lib.optionals (config.bloat.enable) [
                 nerd-fonts.agave
-                wofi
-                waybar
                 ghostty
                 firefox
-                sway
                 autotiling-rs
+                swaylock
               ];
           };
           fonts.fontconfig.enable = true;
+          #################### GUI ENV ####################
+          programs.waybar = {
+            enable = config.bloat.enable;
+            settings = {
+              mainBar = {
+                layer = "top";
+                position = "top";
+                height = 30;
+                output = [ "eDP-1" "HDMI-A-1" ];
+                modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
+                modules-right = [ "battery" "cpu" ];
+                battery = { format = "󰁹 {}%"; };
+                cpu = {
+                  interval = 10;
+                  format = "󰻠 {}%";
+                  max-length = 10;
+                  on-click = "";
+                };
+                "sway/workspaces" = {
+                  disable-scroll = true;
+                  all-outputs = true;
+                };
+              };
+            };
+          };
+          wayland.windowManager.sway = {
+            enable = config.bloat.enable;
+            checkConfig = true;
+            config = {
+              menu = "${pkgs.wofi}/bin/wofi --show drun";
+              modifier = "Mod4";
+              terminal = "ghostty";
+              bars = [{ command = "waybar"; }];
+              output = { "eDP-1" = { bg = "${../wallpaper.jpg} fill"; }; };
+            };
+            extraConfig = ''
+              gaps inner 10
+              gaps horizontal 10
+              gaps vertical 10
+              default_border none
+              exec ${pkgs.autotiling-rs}/bin/autotiling-rs
+              bindgesture swipe:right workspace prev
+              bindgesture swipe:left workspace next
+              input "type:keyboard" xkb_options caps:escape
+            '';
+          };
+          programs.wofi = {
+            enable = true;
+            settings = {
+              location = "center";
+              allow_markup = true;
+              width = 400;
+            };
+            style = builtins.readFile ../styles/wofi.css;
+          };
 
           ###################### GIT ######################
           programs = {
