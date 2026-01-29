@@ -10,7 +10,7 @@
     sshBox.enable = true;
     sshBox.doSecurity = false;
     isK3sNode.enable = true;
-    isK3sNode.role = "agent";
+    isK3sNode.isServer = false;
     nixpkgs.config.allowUnfree = true;
 
     # Don't change unless you like pain
