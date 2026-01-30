@@ -8,6 +8,8 @@
   config = {
     networking.hostName = "leonardo";
     bloat.enable = false;
+    sshBox.enable = true;
+    sshBox.doSecurity = false;
     isK3sNode.enable = true;
     isK3sNode.isServer = false;
     boot.loader.systemd-boot.enable = true;
