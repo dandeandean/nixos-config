@@ -8,6 +8,7 @@
     };
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.copySystemConfiguration = true;
+    networking.networkmanager.enable = true;
     programs.zsh.enable = true;
     environment.systemPackages = with pkgs;
       [
