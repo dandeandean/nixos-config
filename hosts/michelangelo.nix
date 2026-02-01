@@ -11,5 +11,11 @@
       graphics = { enable = true; };
     };
     bloat.enable = true;
+    # The following is needed for swaylock to work
+    security.pam.services.swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
   };
 }

@@ -62,6 +62,7 @@ in {
                 firefox
                 autotiling-rs
                 swaylock
+                swayidle
               ];
           };
           fonts.fontconfig.enable = true;
