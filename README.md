@@ -20,9 +20,3 @@ Example for `splinter`:
 }
 ```
 
-### Todo
-Write something that can grab some of the fixtures we need:
-I.E.:
-  - $HOME/git/dotfiles
-  - $HOME/git/desktop-env (for the desktop environment)
-  - $HOME/.kube/cluster-secret
