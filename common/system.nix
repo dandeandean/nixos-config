@@ -21,6 +21,7 @@
         htop
         nmap
         git
+        fluxcd
 
         # Editing
         vim
