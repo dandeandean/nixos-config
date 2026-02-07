@@ -28,7 +28,6 @@ in {
                 powershell
                 nvimpager
                 nmap
-                opentofu
                 k9s
                 jq
                 tree
@@ -39,6 +38,9 @@ in {
                 sqlite
                 lazygit
                 gnumake
+                opentofu
+                pulumi
+                gemini-cli-bin
 
                 ################### NVIM DEPS ###################
                 ripgrep
