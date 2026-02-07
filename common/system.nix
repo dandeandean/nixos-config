@@ -22,6 +22,7 @@
         nmap
         git
         fluxcd
+        tailscale
 
         # Editing
         vim

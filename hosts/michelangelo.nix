@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../users/ddd.nix
     ../common
@@ -19,8 +19,11 @@
       apple.touchBar = { enable = true; };
       graphics = { enable = true; };
     };
-    bloat.enable = true;
+    # Tailscale
+    tailscale.enable = true;
+    # GUI
     # The following is needed for swaylock to work
+    bloat.enable = true;
     security.pam.services.swaylock = {
       text = ''
         auth include login
