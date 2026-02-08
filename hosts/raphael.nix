@@ -12,6 +12,7 @@
     isK3sNode.enable = true;
     isK3sNode.isServer = false;
     nixpkgs.config.allowUnfree = true;
+    tailscale.enable = true;
 
     # Don't change unless you like pain
     system.stateVersion = "25.05"; # Did you read the comment?

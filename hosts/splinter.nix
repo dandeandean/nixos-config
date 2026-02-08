@@ -13,6 +13,8 @@
     sshBox.doSecurity = false;
     isK3sNode.enable = true;
 
+    tailscale.enable = true;
+
     # Don't change unless you like pain
     system.stateVersion = "25.05"; # Did you read the comment?
   };

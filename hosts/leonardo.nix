@@ -12,6 +12,7 @@
     sshBox.doSecurity = false;
     isK3sNode.enable = true;
     isK3sNode.isServer = false;
+    tailscale.enable = true;
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = false;
     system.stateVersion = "25.11"; # Don't change
