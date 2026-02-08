@@ -40,7 +40,6 @@ in {
                 gnumake
                 opentofu
                 pulumi
-                gemini-cli
 
                 ################### NVIM DEPS ###################
                 ripgrep
