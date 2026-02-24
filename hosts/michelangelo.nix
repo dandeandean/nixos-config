@@ -22,6 +22,8 @@
     # Tailscale
     tailscale.enable = true;
     # GUI
+    # If you need to share your screen, this is what you want
+    # xdg.portal.wlr.enable = true;
     # The following is needed for swaylock to work
     bloat.enable = true;
     security.pam.services.swaylock = {

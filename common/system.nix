@@ -16,6 +16,7 @@
         wget
         kubernetes
         kubectl
+        kubernetes-helm
         kompose
         python3
         htop

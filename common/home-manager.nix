@@ -64,6 +64,7 @@ in {
                 autotiling-rs
                 swaylock
                 swayidle
+                chromium
               ];
           };
           fonts.fontconfig.enable = true;
