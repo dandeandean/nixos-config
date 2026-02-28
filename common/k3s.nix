@@ -33,7 +33,8 @@ in {
       serverAddr = if config.isK3sNode.isServer then "" else hostAddr;
       clusterInit = config.isK3sNode.isServer;
       token = builtins.readFile /home/ddd/.kube/cluster-secret;
-      # extraFlags = [ "--disable-network-policy" ];
+      extraFlags =
+        if config.isK3sNode.isServer then [ "-tls-san=100.90.89.66" ] else [ ];
     };
     virtualisation = {
       containers.enable = true;
