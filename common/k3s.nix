@@ -1,5 +1,7 @@
 { lib, config, ... }:
-let hostAddr = "https://10.0.0.10:6443";
+let
+  hostAddr = "https://10.0.0.10:6443";
+  hostTailIP = "100.90.89.66";
 in {
   /* STARTUP ISSUES: This seems to be what is causing the node startup issues.
        https://github.com/k3s-io/k3s/issues/12844
@@ -34,7 +36,7 @@ in {
       clusterInit = config.isK3sNode.isServer;
       token = builtins.readFile /home/ddd/.kube/cluster-secret;
       extraFlags =
-        if config.isK3sNode.isServer then [ "-tls-san=100.90.89.66" ] else [ ];
+        if config.isK3sNode.isServer then [ "-tls-san=${hostTailIP}" ] else [ ];
     };
     virtualisation = {
       containers.enable = true;
