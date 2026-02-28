@@ -1,16 +1,6 @@
 { lib, config, ... }:
-let
-  hostAddr = "https://10.0.0.10:6443";
-  hostTailIP = "100.90.89.66";
+let hostAddr = "https://10.0.0.10:6443";
 in {
-  /* STARTUP ISSUES: This seems to be what is causing the node startup issues.
-       https://github.com/k3s-io/k3s/issues/12844
-       https://dev.to/shankar_t/my-k3s-pi-cluster-died-after-a-reboot-a-troubleshooting-war-story-m93
-     systemd.services."k3s.service".requires = [ "network-setup.service" ];
-     From https://discourse.nixos.org/t/how-do-i-set-up-k3s-on-nixos/52056/2
-  */
-  # Options: https://search.nixos.org/options?channel=unstable&show=services.k3s.extraKubeletConfig&query=k3s
-  # Good intro to options: https://librephoenix.com/2023-12-26-nixos-conditional-config-and-custom-options
   options.isK3sNode = {
     enable = lib.mkEnableOption "Enable the K3S service on host";
     isServer = lib.mkOption {
@@ -35,8 +25,9 @@ in {
       serverAddr = if config.isK3sNode.isServer then "" else hostAddr;
       clusterInit = config.isK3sNode.isServer;
       token = builtins.readFile /home/ddd/.kube/cluster-secret;
-      extraFlags =
-        if config.isK3sNode.isServer then [ "-tls-san=${hostTailIP}" ] else [ ];
+      # extraFlags =
+      #   if config.isK3sNode.isServer then [ "-tls-san=${hostTailIP}" ] else [ ];
+      # not sure if this will work on the next startup. I needed to manually edit k3s-servings
     };
     virtualisation = {
       containers.enable = true;
