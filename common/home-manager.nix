@@ -126,9 +126,9 @@ in {
           programs.swaylock = {
             enable = config.bloat.enable;
             settings = {
-              font-size = 0;
-              indicator-radius = 10;
-              indicator-thickness = 10;
+              font-size = 26;
+              indicator-radius = 50;
+              indicator-thickness = 50;
               image = "${../wallpaper.jpg}";
               text-color = "ebdbb2";
               show-failed-attempts = true;
