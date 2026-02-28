@@ -124,23 +124,18 @@ in {
             '';
           };
           programs.swaylock = {
-            enable = true;
+            enable = config.bloat.enable;
             settings = {
-              color = "808080";
-              font-size = 24;
-              indicator-radius = 100;
-              indicator-thickness = 20;
+              font-size = 0;
+              indicator-radius = 10;
+              indicator-thickness = 10;
               image = "${../wallpaper.jpg}";
-              line-color = "000000";
-              ring-color = "444444";
-              key-hl-color = "880033";
-              separator-color = "000000";
-              text-color = "ffffff";
+              text-color = "ebdbb2";
               show-failed-attempts = true;
             };
           };
           services.swayidle = {
-            enable = true;
+            enable = config.bloat.enable;
             events = [
               {
                 event = "before-sleep";
