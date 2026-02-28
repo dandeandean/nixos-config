@@ -1,4 +1,6 @@
 { lib, config, ... }:
+# This is static,
+# so long as it's plugged into the right port on the router...
 let hostAddr = "https://10.0.0.10:6443";
 in {
   options.isK3sNode = {
