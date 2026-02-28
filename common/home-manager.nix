@@ -78,13 +78,21 @@ in {
                 height = 30;
                 output = [ "eDP-1" "HDMI-A-1" ];
                 modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
-                modules-right = [ "battery" "cpu" ];
+                modules-right = [ "cpu" "memory" "battery" ];
                 battery = { format = "󰁹 {}%"; };
                 cpu = {
                   interval = 10;
-                  format = "󰻠 {}%";
+                  format = "󰻠  {}%";
                   max-length = 10;
                   on-click = "";
+                };
+                memory = {
+                  interval = 30;
+                  format = "   {}%";
+                  format-alt =
+                    "   {used:0.1f}G/{total:0.1f}G"; # Shows GB on click/hover
+                  max-length = 10;
+                  tooltip = true;
                 };
                 "sway/workspaces" = {
                   disable-scroll = true;
@@ -112,7 +120,50 @@ in {
               bindgesture swipe:right workspace prev
               bindgesture swipe:left workspace next
               input "type:keyboard" xkb_options caps:escape
+              bindsym Mod4+q exec ${pkgs.swaylock}/bin/swaylock
             '';
+          };
+          programs.swaylock = {
+            enable = true;
+            settings = {
+              color = "808080";
+              font-size = 24;
+              indicator-radius = 100;
+              indicator-thickness = 20;
+              image = "${../wallpaper.jpg}";
+              line-color = "000000";
+              ring-color = "444444";
+              key-hl-color = "880033";
+              separator-color = "000000";
+              text-color = "ffffff";
+              show-failed-attempts = true;
+            };
+          };
+          services.swayidle = {
+            enable = true;
+            events = [
+              {
+                event = "before-sleep";
+                command = "${pkgs.swaylock}/bin/swaylock -c 000000";
+              }
+              {
+                event = "lock";
+                command = "${pkgs.swaylock}/bin/swaylock -c 000000";
+              }
+            ];
+            timeouts = [
+              # Lock screen after 5 minutes
+              {
+                timeout = 300;
+                command = "${pkgs.swaylock}/bin/swaylock -c 000000";
+              }
+              # Turn off displays after 10 minutes (using swaymsg)
+              {
+                timeout = 600;
+                command = "${pkgs.sway}/bin/swaymsg 'output * power off'";
+                resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * power on'";
+              }
+            ];
           };
           programs.wofi = {
             enable = true;
