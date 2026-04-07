@@ -39,7 +39,10 @@ in {
                 lazygit
                 gnumake
                 opentofu
-                pulumi
+                google-cloud-sdk
+                kind
+                qemu
+                virtiofsd
 
                 ################### NVIM DEPS ###################
                 ripgrep
@@ -65,6 +68,7 @@ in {
                 swaylock
                 swayidle
                 chromium
+                xdg-utils
               ];
           };
           fonts.fontconfig.enable = true;
