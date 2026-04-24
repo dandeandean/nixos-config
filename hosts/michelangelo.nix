@@ -3,13 +3,16 @@
     ../users/ddd.nix
     ../common
     /etc/nixos/hardware-configuration.nix
-    /etc/nixos/apple-silicon-support
+    # In order to update the nixpkgs we need to also
+    # /etc/nixos/apple-silicon-support
+    # $ sudo nix-channel --add https://github.com/nix-community/nixos-apple-silicon/archive/main.tar.gz apple-silicon-support
+    # $ sudo nix-channel --update
+    <apple-silicon-support/apple-silicon-support>
+    # update the above directory ^^ from the git repo
   ];
   config = {
 
     networking.hostName = "michelangelo";
-
-    # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = false;
     networking.networkmanager.enable = true; # nmcli
