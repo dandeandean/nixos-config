@@ -1,9 +1,9 @@
-{ config, lib, ... }:
+{ config, lib, inputs, ... }:
 let
-  home-manager = builtins.fetchTarball
+  home-manager-src = if inputs ? home-manager then inputs.home-manager else builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
 in {
-  imports = [ (import "${home-manager}/nixos") ];
+  imports = [ (import "${home-manager-src}/nixos") ];
   options = { bloat.enable = lib.mkEnableOption "Enable Desktop Environment"; };
   config = {
     home-manager = {
