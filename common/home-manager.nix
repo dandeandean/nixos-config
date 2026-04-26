@@ -33,6 +33,7 @@ in {
                 tree
                 fzf
                 go-task
+                wasmtime
 
                 ###################### DEV ######################
                 uv
