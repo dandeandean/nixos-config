@@ -1,6 +1,15 @@
-{ config, lib, pkgs, ... }: {
-  imports =
-    [ /etc/nixos/hardware-configuration.nix ../users/ddd.nix ../common ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    ../users/ddd.nix
+    ../common
+  ];
   config = {
     networking.hostName = "raphael";
     # Use the systemd-boot EFI boot loader.

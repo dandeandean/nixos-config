@@ -1,4 +1,5 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+{
   options.sshBox = {
     enable = lib.mkEnableOption "do ssh?";
     doSecurity = lib.mkOption {
