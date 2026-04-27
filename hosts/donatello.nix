@@ -15,6 +15,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Don't start sleeping when we close the lid & plugged in
+  services.logind.lidSwitchExternalPower = "ignore";
+
   networking.hostName = "donatello"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

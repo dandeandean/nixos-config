@@ -12,7 +12,6 @@
     # update the above directory ^^ from the git repo
   ];
   config = {
-
     networking.hostName = "michelangelo";
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = false;
@@ -33,6 +32,8 @@
         enable = true;
       };
     };
+    # Only lock for short press, don't power off
+    services.logind.settings.Login.HandleRebootKey = "lock";
     # Tailscale
     tailscale.enable = true;
     # GUI
