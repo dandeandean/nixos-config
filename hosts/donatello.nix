@@ -16,11 +16,6 @@
       lidSwitch = "ignore";
       lidSwitchDocked = "ignore";
       lidSwitchExternalPower = "ignore";
-      extraConfig = ''
-        IdleAction=ignore
-        HandlePowerKey=ignore
-        HandleSuspendKey=ignore
-      '';
     };
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
