@@ -12,7 +12,16 @@
   config = {
     networking.hostName = "donatello"; # Define your hostname.
     # Don't start sleeping when we close the lid & plugged in
-    services.logind.lidSwitchExternalPower = "ignore";
+    services.logind = {
+      lidSwitch = "ignore";
+      lidSwitchDocked = "ignore";
+      lidSwitchExternalPower = "ignore";
+      extraConfig = ''
+        IdleAction=ignore
+        HandlePowerKey=ignore
+        HandleSuspendKey=ignore
+      '';
+    };
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
