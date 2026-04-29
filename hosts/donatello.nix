@@ -26,6 +26,7 @@
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    sshBox.enable = true;
     isK3sNode.enable = true;
     isK3sNode.isServer = false;
     system.stateVersion = "25.05"; # Did you read the comment?
