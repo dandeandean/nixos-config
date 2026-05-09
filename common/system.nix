@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
-  laundry = (pkgs.callPackage ../hack/laundry/default.nix { });
+  laundryFlake = builtins.getFlake (toString ../hack/laundry);
+  laundryPkg = laundryFlake.packages.${pkgs.system}.default;
 in
 {
   config = {
@@ -21,7 +22,7 @@ in
       with pkgs;
       [
         # Utils
-        laundry
+        laundryFlake.packages.${system}.default
 
         # System
         wget
@@ -63,7 +64,7 @@ in
     systemd.services."laundry-service" = {
       wantedBy = [ "timers.target" ];
       serviceConfig = {
-        ExecStart = "${laundry}/bin/laundry";
+        ExecStart = "${laundryPkg}/bin/laundry";
         Type = "oneshot";
         User = "root";
         # This is likely a crime of some sort
