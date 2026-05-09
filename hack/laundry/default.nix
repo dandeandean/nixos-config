@@ -2,7 +2,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-pkgs.buildGoModule {
+pkgs.buildGo126Module {
   pname = "laundry";
   version = "0.0.1";
   src = ./.;
