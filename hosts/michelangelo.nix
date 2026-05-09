@@ -26,6 +26,8 @@
         enable = true;
       };
     };
+    # Only lock for short press, don't power off
+    services.logind.settings.Login.HandleRebootKey = "lock";
     # Tailscale
     tailscale.enable = true;
     # GUI

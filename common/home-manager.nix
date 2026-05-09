@@ -5,14 +5,10 @@
   ...
 }:
 let
-  home-manager-src =
-    if inputs ? home-manager then
-      inputs.home-manager
-    else
-      builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
 in
 {
-  imports = [ (import "${home-manager-src}/nixos") ];
+  imports = [ (import "${home-manager}/nixos") ];
   options = {
     bloat.enable = lib.mkEnableOption "Enable Desktop Environment";
   };
@@ -47,6 +43,7 @@ in
                   tree
                   fzf
                   go-task
+                  wasmtime
 
                   ###################### DEV ######################
                   uv
@@ -78,6 +75,7 @@ in
                 ++ lib.optionals (config.bloat.enable) [
                   nerd-fonts.agave
                   ghostty
+                  wezterm
                   firefox
                   autotiling-rs
                   swaylock

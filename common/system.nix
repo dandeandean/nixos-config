@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  laundry = (pkgs.callPackage ../hack/laundry/default.nix { });
+in
 {
   config = {
     nixpkgs.config.allowUnfree = true;
@@ -18,6 +21,9 @@
     environment.systemPackages =
       with pkgs;
       [
+        # Utils
+        laundry
+
         # System
         wget
         kubernetes
@@ -43,9 +49,27 @@
         go
         nodejs_22
         unzip
-        nixfmt-classic
+        nixfmt
       ]
       ++ lib.optionals (builtins.currentSystem == "aarch64-linux") [ gcc ]
       ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [ gcc_multi ];
+
+    systemd.timers."laundry-service" = {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "weekly";
+        Persistent = true;
+      };
+    };
+    systemd.services."laundry-service" = {
+      wantedBy = [ "timers.target" ];
+      serviceConfig = {
+        ExecStart = "${laundry}/bin/laundry";
+        Type = "oneshot";
+        User = "root";
+        # This is likely a crime of some sort
+        Environment = "PATH=/run/current-system/sw/bin:${pkgs.coreutils}/bin";
+      };
+    };
   };
 }
