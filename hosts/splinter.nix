@@ -1,6 +1,12 @@
-{ config, lib, pkgs, ... }: {
-  imports =
-    [ /etc/nixos/hardware-configuration.nix ../users/ddd.nix ../common ];
+{
+  ...
+}:
+{
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    ../users/ddd.nix
+    ../common
+  ];
 
   config = {
     # Use the systemd-boot EFI boot loader.

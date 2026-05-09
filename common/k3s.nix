@@ -1,15 +1,16 @@
 { lib, config, ... }:
 # This is static,
 # so long as it's plugged into the right port on the router...
-let hostAddr = "https://10.0.0.10:6443";
-in {
+let
+  hostAddr = "https://10.0.0.10:6443";
+in
+{
   options.isK3sNode = {
     enable = lib.mkEnableOption "Enable the K3S service on host";
     isServer = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description =
-        "Which role would you like the node to have: server or agent?";
+      description = "Which role would you like the node to have: server or agent?";
     };
   };
   config = {
@@ -43,4 +44,3 @@ in {
     };
   };
 }
-

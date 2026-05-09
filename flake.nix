@@ -15,17 +15,31 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, apple-silicon, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      apple-silicon,
+      ...
+    }@inputs:
     let
-      mkSystem = { hostname, system, isAppleSilicon ? false }:
+      mkSystem =
+        {
+          hostname,
+          system,
+          isAppleSilicon ? false,
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/${hostname}.nix ]
-            ++ nixpkgs.lib.optional isAppleSilicon
-            apple-silicon.nixosModules.apple-silicon-support;
+          modules = [
+            ./hosts/${hostname}.nix
+          ]
+          ++ nixpkgs.lib.optional isAppleSilicon apple-silicon.nixosModules.apple-silicon-support;
         };
-    in {
+    in
+    {
       nixosConfigurations = {
         michelangelo = mkSystem {
           hostname = "michelangelo";

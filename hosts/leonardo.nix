@@ -1,6 +1,12 @@
-{ config, lib, pkgs, ... }: {
-  imports =
-    [ ../users/ddd.nix ../common /etc/nixos/hardware-configuration.nix ];
+{
+  ...
+}:
+{
+  imports = [
+    ../users/ddd.nix
+    ../common
+    /etc/nixos/hardware-configuration.nix
+  ];
   config = {
     networking.hostName = "leonardo";
     bloat.enable = false;
