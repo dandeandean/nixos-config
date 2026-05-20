@@ -61,6 +61,7 @@ in
                   go
                   nodejs_22
                   unzip
+                  rustfmt
 
                   ## LSPs ### (that Mason can't sort out)
                   rust-analyzer
