@@ -50,6 +50,7 @@ in
                   kind
                   qemu
                   virtiofsd
+                  postgresql
 
                   ################### NVIM DEPS ###################
                   ripgrep
