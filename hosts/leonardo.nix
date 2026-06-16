@@ -9,7 +9,6 @@
     ../users/ddd.nix
     ../common
     /etc/nixos/hardware-configuration.nix
-    /etc/nixos/apple-silicon-support
   ];
   config = {
     networking.hostName = "leonardo";
