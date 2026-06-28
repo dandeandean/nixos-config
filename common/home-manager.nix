@@ -51,6 +51,7 @@ in
                   qemu
                   virtiofsd
                   postgresql
+                  opencode
 
                   ################### NVIM DEPS ###################
                   ripgrep
