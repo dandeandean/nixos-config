@@ -35,7 +35,12 @@
       loadModels = [
         "llama3.2:3b"
         "deepseek-r1:1.5b"
+        "qwen3:1.7b"
       ];
+      environmentVariables = {
+        OLLAMA_HOST = "0.0.0.0:11434";
+        OLLAMA_NO_CLOUD = "1";
+      };
     };
   };
 }
