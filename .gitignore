@@ -1,2 +1,4 @@
 result
 **/vendor/
+**.iso
+**.sha
