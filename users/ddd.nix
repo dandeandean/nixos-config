@@ -7,7 +7,6 @@
     extraGroups = [
       "wheel"
       "podman"
-    ]; # Enable ‘sudo’ for the user.
-    # Packages handled in home manager
+    ];
   };
 }
