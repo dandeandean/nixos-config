@@ -1,15 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  imports = [
-    /etc/nixos/hardware-configuration.nix
-    ../users/ddd.nix
-    ../common
-  ];
+{ config, lib, pkgs, ... }: {
+  imports =
+    [ /etc/nixos/hardware-configuration.nix ../users/ddd.nix ../common ];
 
   config = {
     # Use the systemd-boot EFI boot loader.
@@ -27,6 +18,7 @@
     # Don't change unless you like pain
     system.stateVersion = "25.05"; # Did you read the comment?
 
+    nixpkgs.config.allowUnfree = true;
     services.ollama = {
       enable = true;
       # GPU Acceleration
@@ -34,10 +26,7 @@
       # Optional: preload models, see https://ollama.com/library
       host = "0.0.0.0";
       port = 11434;
-      loadModels = [
-        "llama3.2:3b"
-        "qwen3:1.7b"
-      ];
+      loadModels = [ "llama3.2:3b" "qwen3:1.7b" ];
     };
   };
 }
