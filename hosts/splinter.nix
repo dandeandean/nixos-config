@@ -1,6 +1,15 @@
-{ config, lib, pkgs, ... }: {
-  imports =
-    [ /etc/nixos/hardware-configuration.nix ../users/ddd.nix ../common ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    ../users/ddd.nix
+    ../common
+  ];
 
   config = {
     # Use the systemd-boot EFI boot loader.
@@ -26,7 +35,10 @@
       # Optional: preload models, see https://ollama.com/library
       host = "0.0.0.0";
       port = 11434;
-      loadModels = [ "llama3.2:3b" "qwen3:1.7b" ];
+      loadModels = [
+        "llama3.2:3b"
+        "qwen3:1.7b"
+      ];
     };
   };
 }
