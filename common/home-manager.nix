@@ -1,6 +1,9 @@
 { config, lib, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+    sha256 = "sha256:07pk5m6mxi666dclaxdwf7xrinifv01vvgxn49bjr8rsbh31syaq";
+  };
 in
 {
   imports = [ (import "${home-manager}/nixos") ];
