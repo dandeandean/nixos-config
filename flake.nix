@@ -5,19 +5,26 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
+    apple-silicon.url = "github:nix-community/nixos-apple-silicon";
   };
 
   outputs =
-    { self, nixpkgs }:
+    {
+      self,
+      nixpkgs,
+      apple-silicon,
+    }@inputs:
     {
       nixosConfigurations = {
         # Rebuild with:
         # nixos-rebuild --flake .#michelangelo switch --show-trace --impure
         # The impure is from absolute paths to hardware
         michelangelo = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
           system = "aarch64-linux";
           modules = [
-            ./hosts/michelangelo.nix
+            apple-silicon.nixosModules.apple-silicon-support
+            ./hosts/michelangelo/michelangelo.nix
           ];
         };
       };

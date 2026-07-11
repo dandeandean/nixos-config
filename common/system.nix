@@ -15,7 +15,7 @@ in
       "nix-command"
       "flakes"
     ];
-    system.copySystemConfiguration = true;
+    system.copySystemConfiguration = false;
     networking.networkmanager.enable = true;
     programs.zsh.enable = true;
     environment.systemPackages =
