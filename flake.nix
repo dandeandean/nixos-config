@@ -27,6 +27,14 @@
             ./hosts/michelangelo/michelangelo.nix
           ];
         };
+        rocksteady = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/clones/configuration.nix
+	    ./common
+          ];
+        };
       };
     };
 }
