@@ -1,0 +1,78 @@
+{
+  "nodes": {
+    "apple-silicon": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1783669315,
+        "narHash": "sha256-DjIkyK48jWUxYCCoTDS9L5PgGg6/RFRSRXW2dSFpJg8=",
+        "owner": "nix-community",
+        "repo": "nixos-apple-silicon",
+        "rev": "9e46a0edd8a6d96538d146a4bb4477e7fae8b1a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-apple-silicon",
+        "type": "github"
+      }
+    },
+    "flake-compat": {
+      "locked": {
+        "lastModified": 1761640442,
+        "narHash": "sha256-AtrEP6Jmdvrqiv4x2xa5mrtaIp3OEe8uBYCDZDS+hu8=",
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "rev": "4a56054d8ffc173222d09dad23adf4ba946c8884",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1783224372,
+        "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1783224372,
+        "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "apple-silicon": "apple-silicon",
+        "nixpkgs": "nixpkgs_2"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
