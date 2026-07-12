@@ -29,7 +29,7 @@
 
     nixpkgs.config.allowUnfree = true;
     services.ollama = {
-      enable = true;
+      enable = false;
       # GPU Acceleration
       package = pkgs.ollama-cuda;
       # Optional: preload models, see https://ollama.com/library

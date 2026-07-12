@@ -14,5 +14,6 @@
     };
     services.fail2ban.enable = config.sshBox.doSecurity;
     networking.firewall.enable = config.sshBox.doSecurity;
+    programs.ssh.startAgent = true;
   };
 }
