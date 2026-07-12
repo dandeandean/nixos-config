@@ -40,6 +40,18 @@
             ./common
           ];
         };
+        bebop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            ({ ... }: {
+              foot.hostName = "bebop";
+            })
+            ./hosts/clones/configuration.nix
+          ];
+        };
       };
     };
 }
