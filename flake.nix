@@ -28,11 +28,16 @@
           ];
         };
         rocksteady = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           system = "x86_64-linux";
           modules = [
+            ({ ... }: {
+              foot.hostName = "rocksteady";
+            })
             ./hosts/clones/configuration.nix
-	    ./common
+            ./common
           ];
         };
       };

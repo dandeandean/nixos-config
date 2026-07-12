@@ -16,14 +16,21 @@
     ../../users/ddd.nix
   ];
 
-  config = {
-    networking.hostName = "rocksteady";
+  options.foot.hostName = lib.mkOption {
+    type = lib.types.str;
+    description = "the hostname for the foot clan instance";
+    example = "rocksteady";
+  };
 
+  config = {
+    networking.hostName = config.foot.hostName;
+    sshBox.enable = true;
+    sshBox.doSecurity = false;
     networking.networkmanager.enable = true;
 
     # Boot Loader Settings
     # boot.loader.systemd-boot.enable = true; -- This caused no boot partion to be found
-    # Not certain we need this
+    # Not certain we need this, but we need to be able to find the mmc_drive at boot time
     hardware.enableAllHardware = true;
     boot = {
       loader.efi.canTouchEfiVariables = true;
