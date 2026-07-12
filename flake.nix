@@ -37,7 +37,6 @@
               foot.hostName = "rocksteady";
             })
             ./hosts/clones/configuration.nix
-            ./common
           ];
         };
         bebop = nixpkgs.lib.nixosSystem {
@@ -48,6 +47,18 @@
           modules = [
             ({ ... }: {
               foot.hostName = "bebop";
+            })
+            ./hosts/clones/configuration.nix
+          ];
+        };
+        krang = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            ({ ... }: {
+              foot.hostName = "krang";
             })
             ./hosts/clones/configuration.nix
           ];
