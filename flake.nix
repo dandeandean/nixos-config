@@ -33,9 +33,6 @@
           };
           system = "x86_64-linux";
           modules = [
-            ({ ... }: {
-              foot.hostName = "splinter";
-            })
             ./hosts/splinter/configuration.nix
           ];
         };
