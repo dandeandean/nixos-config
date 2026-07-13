@@ -27,6 +27,18 @@
             ./hosts/michelangelo/michelangelo.nix
           ];
         };
+        splinter = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            ({ ... }: {
+              foot.hostName = "splinter";
+            })
+            ./hosts/splinter/configuration.nix
+          ];
+        };
         rocksteady = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;

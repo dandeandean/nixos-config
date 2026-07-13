@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ../users/ddd.nix
     ../common
   ];
@@ -32,7 +32,6 @@
       enable = false;
       # GPU Acceleration
       package = pkgs.ollama-cuda;
-      # Optional: preload models, see https://ollama.com/library
       host = "0.0.0.0";
       port = 11434;
       loadModels = [
