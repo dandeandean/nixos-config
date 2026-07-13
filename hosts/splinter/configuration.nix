@@ -7,8 +7,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../users/ddd.nix
-    ../common
+    ../../users/ddd.nix
+    ../../common
   ];
 
   config = {
