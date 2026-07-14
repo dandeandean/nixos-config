@@ -8,6 +8,7 @@
   imports = [
     ../users/ddd.nix
     ../common
+    ./hardware-configuration.nix
   ];
   config = {
     networking.hostName = "donatello"; # Define your hostname.
