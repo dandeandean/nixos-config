@@ -158,7 +158,7 @@ in
               '';
             };
             programs.swaylock = {
-              enable = config.bloat.enable;
+              enable = false;
               settings = {
                 font-size = 26;
                 indicator-radius = 50;
@@ -169,7 +169,7 @@ in
               };
             };
             services.swayidle = {
-              enable = config.bloat.enable;
+              enable = false;
               events = [
                 {
                   event = "before-sleep";
