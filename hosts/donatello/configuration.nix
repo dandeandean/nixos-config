@@ -1,13 +1,10 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }:
 {
   imports = [
-    ../users/ddd.nix
-    ../common
+    ../../users/ddd.nix
+    ../../common
     ./hardware-configuration.nix
   ];
   config = {
