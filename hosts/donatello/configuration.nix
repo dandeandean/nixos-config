@@ -15,12 +15,14 @@
       lidSwitchDocked = "ignore";
       lidSwitchExternalPower = "ignore";
     };
-    systemd.sleep.extraConfig = ''
-      AllowSuspend=no
-      AllowHibernation=no
-      AllowHybridSleep=no
-      AllowSuspendThenHibernate=no
-    '';
+    systemd.sleep.settings = {
+      Sleep = {
+        AllowSuspend = "no";
+        AllowHibernation = "no";
+        AllowHybridSleep = "no";
+        AllowSuspendThenHibernate = "no";
+      };
+    };
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
