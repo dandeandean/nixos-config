@@ -158,7 +158,7 @@ in
               '';
             };
             programs.swaylock = {
-              enable = config.bloat.enable;
+              enable = false;
               settings = {
                 font-size = 26;
                 indicator-radius = 50;
@@ -169,7 +169,7 @@ in
               };
             };
             services.swayidle = {
-              enable = config.bloat.enable;
+              enable = false;
               events = [
                 {
                   event = "before-sleep";
@@ -228,7 +228,7 @@ in
                 config = "$EDITOR $HOME/.config/";
                 manage = "$EDITOR $HOME/.config/home-manager/";
                 nixedit = "$EDITOR $HOME/git/nixos-config";
-                nixupdate = "sudo nixos-rebuild switch";
+                nixupdate = "sudo nixos-rebuild switch --flake ~/git/nixos-config#$(hostname) --impure --show-trace";
               };
               oh-my-zsh = {
                 enable = true;

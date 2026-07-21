@@ -1,14 +1,11 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }:
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
-    ../users/ddd.nix
-    ../common
+    ./hardware-configuration.nix
+    ../../users/ddd.nix
+    ../../common
   ];
   config = {
     networking.hostName = "raphael";

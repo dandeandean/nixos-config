@@ -36,6 +36,25 @@
             ./hosts/splinter/configuration.nix
           ];
         };
+        raphael = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/raphael/configuration.nix
+          ];
+        };
+        donatello = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/donatello/configuration.nix
+          ];
+        };
+
         rocksteady = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
