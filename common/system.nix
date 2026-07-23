@@ -11,10 +11,16 @@ in
       font = "ter-i32b";
       packages = [ pkgs.terminus_font ];
     };
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    nix.settings = {
+      trusted-users = [
+        "root"
+        "ddd"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
     system.copySystemConfiguration = false;
     networking.networkmanager.enable = true;
     programs.zsh.enable = true;
