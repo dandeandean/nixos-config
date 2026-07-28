@@ -3,13 +3,8 @@
   imports = [
     ../../users/ddd.nix
     ../../common
+    ../../home
     ./hardware-configuration.nix
-    # In order to update the nixpkgs we need to also
-    # /etc/nixos/apple-silicon-support
-    # $ sudo nix-channel --add https://github.com/nix-community/nixos-apple-silicon/archive/main.tar.gz apple-silicon-support
-    # $ sudo nix-channel --update
-    # <apple-silicon-support/apple-silicon-support>
-    # update the above directory ^^ from the git repo
   ];
   config = {
     hardware.asahi.enable = true;
