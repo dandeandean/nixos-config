@@ -23,10 +23,18 @@
   };
 
   config = {
-    networking.hostName = config.foot.hostName;
-    sshBox.enable = true;
-    sshBox.doSecurity = false;
-    networking.networkmanager.enable = true;
+    networking = {
+      hostName = config.foot.hostName;
+      networkmanager.enable = true;
+    };
+    sshBox = {
+      enable = true;
+      doSecurity = false;
+    };
+    isK3sNode = {
+      enable = true;
+      isServer = false;
+    };
 
     # Boot Loader Settings
     # boot.loader.systemd-boot.enable = true; -- This caused no boot partion to be found
