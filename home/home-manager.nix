@@ -210,6 +210,9 @@ in
                 enable = true;
                 userName = "dandeandean";
                 userEmail = "dandean44523@gmail.com";
+                extraConfig = {
+                  push.autoSetupRemote = true;
+                };
               };
               gh = {
                 enable = true;
