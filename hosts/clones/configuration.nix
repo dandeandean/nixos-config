@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ../../common
     ../../users/ddd.nix
+    ../../home
   ];
 
   options.foot.hostName = lib.mkOption {

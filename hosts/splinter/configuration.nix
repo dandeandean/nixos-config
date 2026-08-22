@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../users/ddd.nix
     ../../common
+    ../../home
   ];
 
   config = {
