@@ -12,6 +12,7 @@
     };
     hardware.graphics.enable = true;
     services.ollama = {
+      acceleration = "cuda";
       enable = true;
       package = pkgs.ollama-cuda;
       host = "0.0.0.0";
