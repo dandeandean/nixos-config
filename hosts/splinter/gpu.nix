@@ -8,12 +8,16 @@
     nixpkgs.config.allowUnfree = true;
     hardware.nvidia = {
       modesetting.enable = true;
-      nvidiaSettings = false;
+      nvidiaSettings = true;
       open = false;
     };
     # Need this even though we aren't using xserver
     services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.graphics.enable = true;
+    # Open GL settings
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
     # https://www.youtube.com/watch?v=5T52jNXzqIU
     nixpkgs.config.allowUnfreePredicate =
       pkg:
