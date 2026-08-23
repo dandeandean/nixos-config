@@ -10,9 +10,10 @@
       nvidiaSettings = true;
       open = false;
     };
+    # Need this even though we aren't using xserver
+    services.xserver.videoDrivers = [ "nvidia" ];
     hardware.graphics.enable = true;
     services.ollama = {
-      acceleration = "cuda";
       enable = true;
       package = pkgs.ollama-cuda;
       host = "0.0.0.0";
