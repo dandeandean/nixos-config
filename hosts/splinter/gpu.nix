@@ -15,7 +15,7 @@
       nvidiaSettings = true;
       open = false;
       # After manually trying to modprobe, we get an error about only 580.xx
-      # being supported
+      # being supported. Required Reboot.
       package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     };
     # Need this even though we aren't using xserver
