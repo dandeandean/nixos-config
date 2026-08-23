@@ -14,7 +14,9 @@
       powerManagement.finegrained = false;
       nvidiaSettings = true;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # After manually trying to modprobe, we get an error about only 580.xx
+      # being supported
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     };
     # Need this even though we aren't using xserver
     services.xserver.videoDrivers = [ "nvidia" ];
