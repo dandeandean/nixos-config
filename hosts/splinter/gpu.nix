@@ -38,9 +38,12 @@
       ];
     services.ollama = {
       enable = true;
-      package = pkgs.ollama-cuda;
       host = "0.0.0.0";
       port = 11434;
+      package = pkgs.ollama-cuda.override {
+        # nvidia-smi --query-gpu=compute_cap
+        cudaArches = [ "61" ];
+      };
       loadModels = [
         "llama3.2:3b"
         "qwen3:1.7b"
