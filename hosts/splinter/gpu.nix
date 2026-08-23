@@ -1,15 +1,20 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 {
   config = {
     nixpkgs.config.allowUnfree = true;
+    # https://community.frame.work/t/egpu-gtx-1060-6gb-working-great-on-nixos-on-the-12th-gen-framework/40919
     hardware.nvidia = {
       modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
       nvidiaSettings = true;
       open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     # Need this even though we aren't using xserver
     services.xserver.videoDrivers = [ "nvidia" ];
