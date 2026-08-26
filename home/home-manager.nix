@@ -55,6 +55,8 @@ in
                   virtiofsd
                   postgresql
                   opencode
+                  llvm
+                  cmake
 
                   ################### NVIM DEPS ###################
                   ripgrep
@@ -71,6 +73,7 @@ in
                   ## LSPs ### (that Mason can't sort out)
                   rust-analyzer
                   lua-language-server
+                  clang-tools
                 ]
                 #################### DEKSTOP ####################
                 ++ lib.optionals (config.bloat.enable) [
