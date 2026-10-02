@@ -34,7 +34,8 @@
     };
     isK3sNode = {
       enable = true;
-      isServer = false;
+      isServer = true;
+      joinAsHAServer = true;
     };
 
     # Boot Loader Settings

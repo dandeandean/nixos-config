@@ -12,6 +12,11 @@ in
       default = true;
       description = "Which role would you like the node to have: server or agent?";
     };
+    joinAsHAServer = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Join an HA cluster";
+    };
   };
   config = {
     networking.firewall.allowedTCPPorts = [
@@ -26,7 +31,7 @@ in
       enable = config.isK3sNode.enable;
       role = if config.isK3sNode.isServer then "server" else "agent";
       serverAddr = if config.isK3sNode.isServer then "" else hostAddr;
-      clusterInit = config.isK3sNode.isServer;
+      clusterInit = !config.isK3sNode.joinAsHAServer && config.isK3sNode.isServer;
       token = builtins.readFile /home/ddd/.kube/cluster-secret;
       # extraFlags =
       #   if config.isK3sNode.isServer then [ "-tls-san=${hostTailIP}" ] else [ ];
