@@ -8,6 +8,7 @@
   ];
   config = {
     hardware.asahi.enable = true;
+    hardware.bluetooth.enable = true;
     networking.hostName = "michelangelo";
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = false;
